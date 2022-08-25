@@ -35,7 +35,7 @@ public:
 
         T *operator->() const { return ptr; } // 重载指针运算符
 
-        // void reset() noexcept; 
+        void reset() noexcept; 
 
         // To Do
         // std::basic_ostream &operator<<(std::basic_ostream&os, const shared_ptr<T> &sptr){ os << sptr.ptr; return os; }
@@ -119,6 +119,13 @@ public:
         sptr.countptr = new int[1];
         *(sptr.countptr) = 1;
         return *this;
+    }
+
+    template <typename T>
+    void shared_ptr<T>::reset()noexcept
+    {
+        this->~shared_ptr();
+        shared_ptr<T>();
     }
 
     template <typename T>

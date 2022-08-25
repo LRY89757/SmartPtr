@@ -23,11 +23,6 @@ private:
 
 int main()
 {
-    // std::shared_ptr<Foo> sptr0 = std::shared_ptr<Foo>(new Foo[10]); // error
-    // std::shared_ptr<Foo> sptr1 = std::shared_ptr<Foo>(new Foo);
-
-    // std::shared_ptr<int> sptr2 = std::shared_ptr<int>(new int);
-    // std::shared_ptr<int> sptr3 = std::shared_ptr<int>(new int[10]); // no error? why?
     // test_basic();
     test_reset();
     return 0;
@@ -106,10 +101,6 @@ void test_reset()
     {
         // std::shared_ptr<Foo> sptr = std::make_shared<Foo>(100);
         std::shared_ptr<Foo> sptr = std::shared_ptr<Foo>(new Foo);
-        // Foo * p0 = new Foo[10];
-        // Foo * p1 = new Foo(100);
-        // std::shared_ptr<Foo> sptr0 = std::shared_ptr<Foo>(p0);
-        // std::shared_ptr<Foo> sptr1 = std::shared_ptr<Foo>(p1);
         // std::shared_ptr<int> sptr = std::shared_ptr<int>(new int[10]);
 
         std::cout << "Foo::bar = " << sptr->getBar() << ", use_count() = "
@@ -117,11 +108,11 @@ void test_reset()
 
         // Reset the shared_ptr without handing it a fresh instance of Foo.
         // The old instance will be destroyed after this call.
-        // std::cout << "call sptr.reset()...\n";
-        // sptr.reset(); // calls Foo's destructor here
-        // sptr.~shared_ptr();
-        // std::cout << "After reset(): use_count() = " << sptr.use_count()
-                //   << ", sptr = " << sptr.get() << '\n';
+        std::cout << "call sptr.reset()...\n";
+        sptr.reset(); // calls Foo's destructor here
+        sptr.~shared_ptr();
+        std::cout << "After reset(): use_count() = " << sptr.use_count()
+                  << ", sptr = " << sptr.get() << '\n';
     } // No call to Foo's destructor, it was done earlier in reset().
 
 //     std::cout << "\n2) unique ownership\n";
