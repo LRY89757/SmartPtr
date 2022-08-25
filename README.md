@@ -86,23 +86,19 @@
 ## About The Project
 > 实现C++11新特性智能指针
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
 <!-- GETTING STARTED -->
 ## Getting Started
 
-make:
 ```sh
+# make:
 sh make.sh
-```
-run:
-```sh
+# run:
 sh run.sh
 ```
 
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-### Prerequisites
+## Prerequisites
 
 This is an example of how to list things you need to use the software and how to install them.
 * cmake3.8+
@@ -110,26 +106,15 @@ This is an example of how to list things you need to use the software and how to
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-
-
-<!-- USAGE EXAMPLES -->
-## Usage
-
-用来代替标准的智能指针实现。
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
-
 <!-- ROADMAP -->
 ## Roadmap
 
 - `shared_ptr`
-  - [y] 各类构造析构
-  - [y] 指针重载
-  - [x] `reset`函数实现
-  - [x] `make_shared`函数友元
-  - [x] `deleter`函数自定义
+  - :heavy_check_mark: 各类构造析构
+  - :heavy_check_mark: 指针重载
+  - :x: `reset`函数实现
+  - :x: `make_shared`函数友元
+  - :x: `deleter`函数自定义
 - `unique_ptr`  
   - [ ] 
   - [ ] 
