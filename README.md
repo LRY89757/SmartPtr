@@ -66,6 +66,8 @@ This is an example of how to list things you need to use the software and how to
   - :construction: `reset`函数实现
   - :x: `make_shared`函数友元
   - :x: `deleter`函数自定义
+  - :x: `unique`函数实现
+  - :x: 解决使用相同指针来构造不同智能指针对象的问题
 - `unique_ptr`  
   - [ ] 
   - [ ] 

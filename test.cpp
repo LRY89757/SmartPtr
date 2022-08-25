@@ -6,6 +6,7 @@ void test_shared_ptr01();
 void test_basic();
 void test_reset();
 void test_reset1();
+void test_reset2();
 
 struct Foo
 {
@@ -28,7 +29,8 @@ int main()
     // test_basic();
     // test_reset();
     // test_shared_ptr01();
-    test_reset1();
+    // test_reset1();
+    test_reset2();
     return 0;
 }
 
@@ -121,6 +123,42 @@ void test_reset1()
         std::cout << "After reset(): use_count() = " << sptr.use_count()
                   << ", sptr = " << sptr.get() << '\n';
     } // No call to Foo's destructor, it was done earlier in reset().
+}
+
+void test_reset2()
+{
+    std::cout << "\n1) std \n";
+    {
+        std::shared_ptr<Foo> sptr = std::make_shared<Foo>(200);
+
+        std::cout << "Foo::bar = " << sptr->getBar() << ", use_count() = "
+                  << sptr.use_count() << '\n';
+
+        // Reset the shared_ptr, hand it a fresh instance of Foo.
+        // The old instance will be destroyed after this call.
+        std::cout << "call sptr.reset()...\n";
+        sptr.reset(new Foo{222});
+        std::cout << "After reset(): use_count() = " << sptr.use_count()
+                  << ", sptr = " << sptr << "\nLeaving the scope...\n";
+    } // Calls Foo's destructor.
+
+    std::cout<<std::endl;
+
+    std::cout << "\n2) stdd \n";
+    {
+        stdd::shared_ptr<Foo> sptr = stdd::shared_ptr<Foo>(new Foo(200));
+
+        std::cout << "Foo::bar = " << sptr->getBar() << ", use_count() = "
+                  << sptr.use_count() << '\n';
+
+        // Reset the shared_ptr, hand it a fresh instance of Foo.
+        // The old instance will be destroyed after this call.
+        std::cout << "call sptr.reset()...\n";
+        sptr.reset(new Foo{222});
+        std::cout << "After reset(): use_count() = " << sptr.use_count()
+                  << ", sptr = " << sptr.get() << "\nLeaving the scope...\n";
+    } // Calls Foo's destructor.
+
 
 
 }
