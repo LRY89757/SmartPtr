@@ -108,7 +108,6 @@ This is an example of how to list things you need to use the software and how to
 * cmake3.8+
 * gcc9+
 
-### Installation
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
@@ -116,9 +115,7 @@ This is an example of how to list things you need to use the software and how to
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
-
-_For more examples, please refer to the [Documentation](https://example.com)_
+用来代替标准的智能指针实现。
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -127,13 +124,18 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 <!-- ROADMAP -->
 ## Roadmap
 
-- [x] `reset`函数实现
-- [x] `make_shared`函数友元
-- [x] `deleter`函数自定义
-- [ ] 
-- [ ] 
-    - [ ] English
-    - [ ] Spanish
+- `shared_ptr`
+  - [y] 各类构造析构
+  - [y] 指针重载
+  - [x] `reset`函数实现
+  - [x] `make_shared`函数友元
+  - [x] `deleter`函数自定义
+- `unique_ptr`  
+  - [ ] 
+  - [ ] 
+- `weak_ptr`
+  - [ ] 
+  - [ ] 
 
 <!-- See the [open issues](https://github.com/othneildrew/Best-README-Template/issues) for a full list of proposed features (and known issues). -->
 
