@@ -2,8 +2,13 @@
 #ifndef FUNC_H_
 #define FUNC_H_
 #include <iostream>
+#include <vector>
+// #include <cassert>
+#include <algorithm>
 
 namespace stdd{
+
+    static std::vector<void*> PtrPool;
 
     template <typename T>
     class shared_ptr{
@@ -11,6 +16,7 @@ namespace stdd{
         typedef T elemtype;
 
 private:
+
         int *countptr{nullptr};
         elemtype *ptr{nullptr};
 
@@ -75,6 +81,12 @@ public:
     shared_ptr<T>::shared_ptr(T* _ptr): countptr(new int(1)), ptr(_ptr)
     {
         std::cout<<"指针构造函数"<<std::endl;
+        if((PtrPool.end() != std::find(PtrPool.begin(), PtrPool.end(), (void*)_ptr)))
+        {
+            std::cout<<"error! No redefined! Program EXIT!"<<std::endl;
+            exit(-1);
+        }
+        PtrPool.push_back((void*)_ptr);
     }
 
     template <typename T>
@@ -154,6 +166,7 @@ public:
             }
             if (ptr)
             {
+                PtrPool.erase(std::find(PtrPool.begin(), PtrPool.end(), (void*)ptr));
                 delete ptr;
                 ptr = nullptr;
             }
