@@ -1,9 +1,11 @@
-// #include <memory>
+#include <memory>
 #include <iostream>
 #include "func.h"
 
+void test_shared_ptr01();
 void test_basic();
 void test_reset();
+void test_reset1();
 
 struct Foo
 {
@@ -24,17 +26,103 @@ private:
 int main()
 {
     // test_basic();
-    test_reset();
+    // test_reset();
+    // test_shared_ptr01();
+    test_reset1();
     return 0;
 }
 
 
 
 template <typename T>
-void printshared(std::shared_ptr<T> ptr)
+void printshared(std::shared_ptr<T>& ptr)
 {
-    std::cout<<ptr.use_count() - 1<<std::endl;
+    std::cout<<ptr.use_count()<<std::endl;
     std::cout<<ptr.get()<<std::endl;
+}
+template <typename T>
+void printshared(stdd::shared_ptr<T>& ptr)
+{
+    std::cout<<ptr.use_count()<<std::endl;
+    std::cout<<ptr.get()<<std::endl;
+}
+
+void test_shared_ptr01()
+/*无参构造函数*/
+{
+    std::cout<<"无参构造函数"<<std::endl<<std::endl;
+
+    std::cout<<"std:"<<std::endl;
+    std::shared_ptr<int> ptr = std::shared_ptr<int>();
+    printshared(ptr);
+    std::cout<<std::endl;
+
+    std::cout<<"stdd:"<<std::endl;
+    stdd::shared_ptr<int> ptr1 = stdd::shared_ptr<int>();
+    printshared(ptr1);
+    std::cout<<std::endl;
+}
+
+void test_shared_ptr02()
+/*拷贝构造函数*/
+{
+    std::cout<<"拷贝构造函数"<<std::endl<<std::endl;
+
+    // std::cout<<"std:"<<std::endl;
+    // std::shared_ptr<int> ptr = std::shared_ptr<int>();
+    // printshared(ptr);
+    // std::cout<<std::endl;
+
+    // std::cout<<"stdd:"<<std::endl;
+    // stdd::shared_ptr<int> ptr1 = stdd::shared_ptr<int>();
+    // printshared(ptr1);
+    // std::cout<<std::endl;
+}
+
+void test_reset1()
+{
+    std::cout << "1) std:\n";
+    {
+        // std::shared_ptr<Foo> sptr = std::make_shared<Foo>(100);
+        std::shared_ptr<Foo> sptr = std::shared_ptr<Foo>(new Foo);
+        // std::shared_ptr<int> sptr = std::shared_ptr<int>(new int[10]);
+
+        std::cout << "Foo::bar = " << sptr->getBar() << ", use_count() = "
+                  << sptr.use_count() << '\n';
+
+        // Reset the shared_ptr without handing it a fresh instance of Foo.
+        // The old instance will be destroyed after this call.
+        std::cout << "call sptr.reset()...\n";
+        sptr.reset(); // calls Foo's destructor here
+        sptr.reset(); // calls Foo's destructor here
+        sptr.reset(); // calls Foo's destructor here
+        std::cout << "After reset(): use_count() = " << sptr.use_count()
+                  << ", sptr = " << sptr.get() << '\n';
+    } // No call to Foo's destructor, it was done earlier in reset().
+
+    std::cout<<std::endl;
+
+    std::cout << "2) stdd:\n";
+    {
+        // std::shared_ptr<Foo> sptr = std::make_shared<Foo>(100);
+        stdd::shared_ptr<Foo> sptr = stdd::shared_ptr<Foo>(new Foo);
+        // std::shared_ptr<int> sptr = std::shared_ptr<int>(new int[10]);
+
+        std::cout << "Foo::bar = " << sptr->getBar() << ", use_count() = "
+                  << sptr.use_count() << '\n';
+
+        // Reset the shared_ptr without handing it a fresh instance of Foo.
+        // The old instance will be destroyed after this call.
+        std::cout << "call sptr.reset()...\n";
+        sptr.reset(); // calls Foo's destructor here
+        sptr.reset(); // calls Foo's destructor here
+        sptr.reset(); // calls Foo's destructor here
+        sptr.reset(); // calls Foo's destructor here
+        std::cout << "After reset(): use_count() = " << sptr.use_count()
+                  << ", sptr = " << sptr.get() << '\n';
+    } // No call to Foo's destructor, it was done earlier in reset().
+
+
 }
 
 
@@ -86,7 +174,7 @@ void test_basic()
     std::cout<<std::endl;
 
     std::cout<<"阶段8"<<std::endl;
-    std::shared_ptr<int>ptr6 = new int; // 没有explict
+    // std::shared_ptr<int>ptr6 = new int; // 没有explict
     std::cout<<std::endl;
 
     std::cout<<"阶段last"<<std::endl;
@@ -110,7 +198,6 @@ void test_reset()
         // The old instance will be destroyed after this call.
         std::cout << "call sptr.reset()...\n";
         sptr.reset(); // calls Foo's destructor here
-        sptr.~shared_ptr();
         std::cout << "After reset(): use_count() = " << sptr.use_count()
                   << ", sptr = " << sptr.get() << '\n';
     } // No call to Foo's destructor, it was done earlier in reset().
