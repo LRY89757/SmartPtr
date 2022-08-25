@@ -63,7 +63,7 @@ This is an example of how to list things you need to use the software and how to
   - :heavy_check_mark: 各类构造析构
   - :heavy_check_mark: 重载`->`
   - :x: 重载运算符`<<`
-  - :x: `reset`函数实现
+  - :construction: `reset`函数实现
   - :x: `make_shared`函数友元
   - :x: `deleter`函数自定义
 - `unique_ptr`  
