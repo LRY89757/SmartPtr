@@ -37,6 +37,8 @@ public:
 
     void reset() noexcept;
 
+    void reset(T* ptr);
+
     // To Do
     // std::basic_ostream &operator<<(std::basic_ostream&os, const shared_ptr<T> &sptr){ os << sptr.ptr; return os; }
     };
@@ -120,17 +122,16 @@ public:
     template <typename T>
     void shared_ptr<T>::reset()noexcept
     {
-        if(!countptr) return;
-
-        (*countptr)--;
-        if(*countptr == 0)
-        {
-            delete countptr;
-            countptr = nullptr;
-
-            if(ptr) delete ptr;
-        }
+        std::cout<<"reset()"<<std::endl;
+        this->~shared_ptr();
         ptr = nullptr;
+        countptr = nullptr;
+    }
+
+    template <typename T>
+    void shared_ptr<T>::reset(T*ptr)
+    {
+
     }
 
     template <typename T>
@@ -139,8 +140,6 @@ public:
         if (countptr && *countptr > 1)
         {
             (*countptr)--;
-            countptr = nullptr;
-            ptr = nullptr;
         }
         else
         {
